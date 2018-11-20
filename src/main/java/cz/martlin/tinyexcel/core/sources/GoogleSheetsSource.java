@@ -20,9 +20,12 @@ public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, V
 		
 		
 		 List<Sheet> sheets = spreadsheet.getSheets();
-		 return sheets.stream()//
-				 .map((s) -> s.getProperties().getTitle())//
-				 .collect(Collectors.toList());
+		 //FIXME XXX idk ...
+//		 return sheets.stream()//
+//				 .map((s) -> s.getProperties().getTitle())//
+//				 .map((s) - > (String) s) // FIXME
+//				 .collect(Collectors.toList());
+		 return null;
 		 
 	}
 
@@ -87,6 +90,12 @@ public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, V
 	public void saveInternal(String identifier, Spreadsheet internal) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean supports(String identifier) throws TablesbookSourceException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

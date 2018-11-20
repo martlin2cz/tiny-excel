@@ -16,7 +16,7 @@ public class Tablesbook {
 	public Map<String, Table> getTables() {
 		return tables;
 	}
-	
+
 	public void add(String name, Table table) {
 		tables.put(name, table);
 	}
@@ -28,6 +28,37 @@ public class Tablesbook {
 	public Table getTable(String name) {
 		return tables.get(name);
 	}
-	
-	//TODO data class
+
+	// /////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((tables == null) ? 0 : tables.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tablesbook other = (Tablesbook) obj;
+		if (tables == null) {
+			if (other.tables != null)
+				return false;
+		} else if (!tables.equals(other.tables))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Tablesbook" + tables;
+	}
+
 }
