@@ -10,7 +10,7 @@ import com.google.api.services.sheets.v4.model.Spreadsheet;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import cz.martlin.tinyexcel.core.misc.TablesbookSourceException;
-import cz.martlin.tinyexcel.core.source.ListOfListOfStringsSource;
+import cz.martlin.tinyexcel.core.xxx_source.ListOfListOfStringsSource;
 
 public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, ValueRange> {
 	private final  Sheets service = null; //TODO here
@@ -36,12 +36,12 @@ public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, V
 
 	
 	@Override
-	public int inferRowsNumberFromInternal(String identifier, ValueRange sheetRange) throws IOException {
+	public int inferRowsNumberFromExternal(String identifier, ValueRange sheetRange) throws IOException {
 		return sheetRange.getValues().size();
 	}
 
 	@Override
-	public int inferColumnsNumberFromInternal(String identifier, ValueRange sheetRange) throws IOException {
+	public int inferColumnsNumberFromExternal(String identifier, ValueRange sheetRange) throws IOException {
 		//FIXME will crash when empty (handle it)
 		return sheetRange.getValues().get(0).size(); 
 	}
@@ -54,18 +54,18 @@ public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, V
 
 
 	@Override
-	public Spreadsheet obtainTablesbookInternal(String identifier) throws IOException {
+	public Spreadsheet obtainTablesbookExternal(String identifier) throws IOException {
 		Spreadsheet spreadsheet = service.spreadsheets().get(identifier).execute();
 		return spreadsheet;
 	}
 
 	@Override
-	public void addTableToTablesbook(String identifier, ValueRange tableInternal) {
+	public void addTableToTablesbook(String identifier, ValueRange tableExternal) {
 		// ok ignore
 	}
 
 	@Override
-	public ValueRange createTableInternal(String identifier, String sheetName, int rows, int cols) throws IOException {
+	public ValueRange createTableExternal(String identifier, String sheetName, int rows, int cols) throws IOException {
 		return getRangeOfSheet(identifier, sheetName);
 	}
 
@@ -75,19 +75,19 @@ public class GoogleSheetsSource extends ListOfListOfStringsSource<Spreadsheet, V
 	}
 
 	@Override
-	public void addRowToTable(String identifier, ValueRange tableInternal, int rowIndex, List<String> rowInternal) {
+	public void addRowToTable(String identifier, ValueRange tableExternal, int rowIndex, List<String> rowExternal) {
 		// ok ignore
 		
 	}
 
 	@Override
-	public Spreadsheet loadInternal(String identifier) throws IOException {
+	public Spreadsheet loadExternal(String identifier) throws IOException {
 		 Spreadsheet spreadsheet = service.spreadsheets().get(identifier).execute();
 		return spreadsheet;
 	}
 
 	@Override
-	public void saveInternal(String identifier, Spreadsheet internal) throws Exception {
+	public void saveExternal(String identifier, Spreadsheet external) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
